@@ -1,0 +1,63 @@
+{
+  "name": "store",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run build && npm run server",
+    "server": "nodemon dist/server.js",
+    "lint": "eslint . --ext .ts",
+    "prettier": "prettier --config .prettierrc src/**/*.ts --write",
+    "lint/prettier": "npm run lint && npm run prettier",
+    "jasmine": "jasmine",
+    "build": "npx tsc",
+    "test": "set ENV=test&& db-migrate --env test up && jasmine && db-migrate --env test down",
+    "testdown": " db-migrate --env test down -c 5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omnia-khattab/StoreFrontAPI.git"
+  },
+  "keywords": [
+    "store",
+    "api"
+  ],
+  "author": "omnia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/omnia-khattab/StoreFrontAPI/issues"
+  },
+  "homepage": "https://github.com/omnia-khattab/StoreFrontAPI#readme",
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/body-parser": "^1.19.2",
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
+    "@types/jasmine": "^4.0.3",
+    "@types/jsonwebtoken": "^8.5.8",
+    "@types/node": "^17.0.40",
+    "@types/pg": "^8.6.5",
+    "@typescript-eslint/eslint-plugin": "^5.27.1",
+    "@typescript-eslint/parser": "^5.27.1",
+    "eslint": "^8.17.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "jasmine": "^4.1.0",
+    "jasmine-spec-reporter": "^7.0.0",
+    "nodemon": "^2.0.16",
+    "prettier": "^2.6.2",
+    "typescript": "^4.7.3"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "db-migrate": "^0.11.13",
+    "db-migrate-pg": "^1.2.2",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^8.7.3",
+    "ts-node": "^10.8.1"
+  }
+}
