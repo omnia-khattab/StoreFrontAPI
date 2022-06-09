@@ -1,13 +1,11 @@
 import { UserModel } from "../user";
-import jwt from 'jsonwebtoken';
+//import jwt from 'jsonwebtoken';
 import bcrypt from "bcrypt";
 
 const user_model = new UserModel();
 const saltRounds = process.env.SALT_ROUNDS as string;
 const pepper = process.env.BCRYPT_PASSWORD;
 const passHash=bcrypt.hashSync("1234"+pepper,parseInt(saltRounds));
-
-console.log("Environment from Spec is" + process.env.ENV);
 
 describe("User Model", () => {
   it("Should have index method", () => {
@@ -44,15 +42,14 @@ describe("User Model", () => {
     
     result.password=passHash;
 
-    const token=jwt.sign({id:result.id,name:result.first_name,email:result.email},process.env.TOKEN_SECRET as string,{expiresIn:"1h"});
-        result.token=token;
+    //const token=jwt.sign({id:result.id,name:result.first_name,email:result.email},process.env.TOKEN_SECRET as string,{expiresIn:"1h"});
+        
     expect(result).toEqual({
         id: 1,
         first_name: "omnia",
         last_name: "mohamed",
         email: "omnia@gmail.com",
         password: `${passHash}`,
-        token: `${token}`,
         user_role: "user",
     });
   });
@@ -67,7 +64,6 @@ describe("User Model", () => {
         last_name: "mohamed",
         email: "omnia@gmail.com",
         password: `${passHash}`,
-        token: null,
         user_role: "user",
       },
     ]);
@@ -83,7 +79,6 @@ describe("User Model", () => {
         last_name: "mohamed",
         email: "omnia@gmail.com",
         password:`${passHash}`,
-        token: null,
         user_role: "user",
     });
   });
@@ -98,7 +93,6 @@ describe("User Model", () => {
         last_name: "mohamed",
         email: "omnia@gmail.com",
         password:`${passHash}`,
-        token: null,
         user_role: "user",
     });
   });
@@ -112,7 +106,7 @@ describe("User Model", () => {
         last_name: "mohamed",
         email: "omnia@gmail.com",
         password:`${passHash}`,
-        token: null,
+        
         user_role: "user",
     });
   });
@@ -127,7 +121,6 @@ describe("User Model", () => {
         last_name: "mohamed",
         email: "omnia@gmail.com",
         password:`${passHash2}`,
-        token: null,
         user_role: "user",
     });
   });

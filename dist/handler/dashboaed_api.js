@@ -39,19 +39,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 exports.__esModule = true;
-var category_1 = require("../model/category");
+var dashboard_1 = require("../services/dashboard");
 var verifyToken_1 = __importDefault(require("../middlwares/verifyToken"));
-var category_Model = new category_1.CategoryModel();
-var index = function (_req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var categories, err_1;
+var dashboardQuert = new dashboard_1.dashboardQueries();
+var allOrders = function (_req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var orders, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, category_Model.index()];
+                return [4 /*yield*/, dashboardQuert.allOrders()];
             case 1:
-                categories = _a.sent();
-                res.json(categories);
+                orders = _a.sent();
+                res.json(orders);
                 return [3 /*break*/, 3];
             case 2:
                 err_1 = _a.sent();
@@ -61,102 +61,67 @@ var index = function (_req, res) { return __awaiter(void 0, void 0, void 0, func
         }
     });
 }); };
-var find = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var id, categories, err_2;
+var productsInOrders = function (_req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var orders, err_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                id = parseInt(req.params.id);
-                _a.label = 1;
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, dashboardQuert.productsInOrders()];
             case 1:
-                _a.trys.push([1, 3, , 4]);
-                return [4 /*yield*/, category_Model.find(id)];
+                orders = _a.sent();
+                res.json(orders);
+                return [3 /*break*/, 3];
             case 2:
-                categories = _a.sent();
-                res.status(201).json(categories);
-                return [3 /*break*/, 4];
-            case 3:
                 err_2 = _a.sent();
-                res.status(400).json({ message: "".concat(err_2) });
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
+                res.status(400).status(201).json({ message: "".concat(err_2) });
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
-var create = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var c, newCategory, err_3;
+var usersInOrders = function (_req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var users, err_3;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                c = {
-                    name: req.body.name
-                };
-                _a.label = 1;
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, dashboardQuert.usersInOrders()];
             case 1:
-                _a.trys.push([1, 3, , 4]);
-                return [4 /*yield*/, category_Model.create(c)];
+                users = _a.sent();
+                res.json(users);
+                return [3 /*break*/, 3];
             case 2:
-                newCategory = _a.sent();
-                res.status(201).json({ newCategory: newCategory });
-                return [3 /*break*/, 4];
-            case 3:
                 err_3 = _a.sent();
-                res.status(400).json({ message: "".concat(err_3) });
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
+                res.status(400).status(201).json({ message: "".concat(err_3) });
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
-var update = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var id, name, category, err_4;
+var popularProducts = function (_req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var products, err_4;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                id = parseInt(req.params.id);
-                name = req.body.name;
-                _a.label = 1;
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, dashboardQuert.popularProducts()];
             case 1:
-                _a.trys.push([1, 3, , 4]);
-                return [4 /*yield*/, category_Model.update(id, name)];
+                products = _a.sent();
+                res.json(products);
+                return [3 /*break*/, 3];
             case 2:
-                category = _a.sent();
-                res.status(201).json(category);
-                return [3 /*break*/, 4];
-            case 3:
                 err_4 = _a.sent();
-                res.status(400).json({ message: "".concat(err_4) });
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
+                res.status(400).status(201).json({ message: "".concat(err_4) });
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
-var delete_ = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var id, category, err_5;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                id = parseInt(req.params.id);
-                _a.label = 1;
-            case 1:
-                _a.trys.push([1, 3, , 4]);
-                return [4 /*yield*/, category_Model["delete"](id)];
-            case 2:
-                category = _a.sent();
-                res.status(201).json(category);
-                return [3 /*break*/, 4];
-            case 3:
-                err_5 = _a.sent();
-                res.status(400).json({ message: "".concat(err_5) });
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
-        }
-    });
-}); };
-var CATEGORY_API = function (app) {
-    app.get('/categories', verifyToken_1["default"], index);
-    app.get('/category/:id', verifyToken_1["default"], find);
-    app.post('/category/create', verifyToken_1["default"], create);
-    app.put('/category/update/:id', verifyToken_1["default"], update);
-    app["delete"]('/category/:id', verifyToken_1["default"], delete_);
+var dashboard_API = function (app) {
+    app.get('/dasboard/all/orders', verifyToken_1["default"], allOrders);
+    app.get('/dasboard/products', verifyToken_1["default"], productsInOrders);
+    app.get('/dashboard/users', verifyToken_1["default"], usersInOrders);
+    app.get('/dashboard/topProducts', verifyToken_1["default"], popularProducts);
 };
-exports["default"] = CATEGORY_API;
+exports["default"] = dashboard_API;

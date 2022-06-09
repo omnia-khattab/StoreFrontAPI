@@ -9,6 +9,6 @@ $$;
 CREATE TABLE orders( 
     id SERIAL PRIMARY KEY,
     order_status status,
-    user_id bigint REFERENCES users(id)
+    user_id bigint REFERENCES users(id) on delete cascade on update cascade
     
 );

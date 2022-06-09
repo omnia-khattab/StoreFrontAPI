@@ -13,13 +13,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const user_1 = require("../user");
-const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+//import jwt from 'jsonwebtoken';
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const user_model = new user_1.UserModel();
 const saltRounds = process.env.SALT_ROUNDS;
 const pepper = process.env.BCRYPT_PASSWORD;
 const passHash = bcrypt_1.default.hashSync("1234" + pepper, parseInt(saltRounds));
-console.log("Environment from Spec is" + process.env.ENV);
 describe("User Model", () => {
     it("Should have index method", () => {
         expect(user_model.index).toBeDefined();
@@ -51,15 +50,13 @@ describe("User Model", () => {
             user_role: "user",
         });
         result.password = passHash;
-        const token = jsonwebtoken_1.default.sign({ id: result.id, name: result.first_name, email: result.email }, process.env.TOKEN_SECRET, { expiresIn: "1h" });
-        result.token = token;
+        //const token=jwt.sign({id:result.id,name:result.first_name,email:result.email},process.env.TOKEN_SECRET as string,{expiresIn:"1h"});
         expect(result).toEqual({
             id: 1,
             first_name: "omnia",
             last_name: "mohamed",
             email: "omnia@gmail.com",
             password: `${passHash}`,
-            token: `${token}`,
             user_role: "user",
         });
     }));
@@ -73,7 +70,6 @@ describe("User Model", () => {
                 last_name: "mohamed",
                 email: "omnia@gmail.com",
                 password: `${passHash}`,
-                token: null,
                 user_role: "user",
             },
         ]);
@@ -87,7 +83,6 @@ describe("User Model", () => {
             last_name: "mohamed",
             email: "omnia@gmail.com",
             password: `${passHash}`,
-            token: null,
             user_role: "user",
         });
     }));
@@ -102,7 +97,6 @@ describe("User Model", () => {
             last_name: "mohamed",
             email: "omnia@gmail.com",
             password: `${passHash}`,
-            token: null,
             user_role: "user",
         });
     }));
@@ -115,7 +109,6 @@ describe("User Model", () => {
             last_name: "mohamed",
             email: "omnia@gmail.com",
             password: `${passHash}`,
-            token: null,
             user_role: "user",
         });
     }));
@@ -129,7 +122,6 @@ describe("User Model", () => {
             last_name: "mohamed",
             email: "omnia@gmail.com",
             password: `${passHash2}`,
-            token: null,
             user_role: "user",
         });
     }));

@@ -11,7 +11,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const category_1 = require("../category");
 const category_model = new category_1.CategoryModel();
-console.log("Environment from Spec is" + process.env.ENV);
 describe("Category Model", () => {
     it("Should have index method", () => {
         expect(category_model.index).toBeDefined();

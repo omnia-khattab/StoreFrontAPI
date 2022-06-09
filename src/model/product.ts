@@ -40,6 +40,7 @@ export class ProductModel{
         }
     }
 
+
     async create(p:Product):Promise<Product> {
         
         try{
@@ -84,4 +85,48 @@ export class ProductModel{
         }
     }
 
+    async ProductByCategory(category_id:number):Promise<Product>{
+        try{
+            const conn = await Client.connect();
+            const sql='SELECT * FROM products WHERE category_id=($1)';
+            const result= await conn.query(sql,[category_id]);
+            const product= result.rows[0];
+            conn.release();
+            return product;
+        }
+        catch(err){
+            throw new Error(`Couldn't find product. Error: ${err}` );
+        }   
+    }
+
+    //Get number of pieces of product
+    async PiecesNo(productId:number):Promise<Product['pieces']> {
+        
+        try{
+            const conn = await Client.connect();
+            const piecesSQL='SELECT pieces FROM products WHERE id=($1)';
+            const pieceResult = await conn.query(piecesSQL, [productId]);
+            const piecesNo= pieceResult.rows[0];
+            //console.log(piecesNo);
+            conn.release();
+            return piecesNo.pieces;
+        }
+        catch(err){
+            throw new Error(`Couldn't find product ${productId}. Error: ${err}` );
+        }
+    }
+
+    //update number of pieces
+    /*async updatePieces(productID:number,quantity:number):Promise<Product>{
+        try{
+            const conn = await Client.connect();
+            const Productpieces=await this.PiecesNo(productID);
+            const newpiecesNo=Productpieces-quantity;   
+            const result=await conn.query(`UPDATE products SET pieces=${newpiecesNo} WHERE id=${productID}`); 
+            return result.rows[0];
+        }
+        catch(err){
+            throw new Error(`Couldn't update pieces no of product ${productID}. Error: ${err}` );
+        }
+    }*/
 }

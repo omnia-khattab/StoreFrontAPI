@@ -39,14 +39,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 exports.__esModule = true;
-exports.CategoryModel = void 0;
+exports.dashboardQueries = void 0;
 var database_1 = __importDefault(require("../database"));
-var CategoryModel = /** @class */ (function () {
-    function CategoryModel() {
+var dashboardQueries = /** @class */ (function () {
+    function dashboardQueries() {
     }
-    CategoryModel.prototype.index = function () {
+    //get All orders in orders-products
+    dashboardQueries.prototype.allOrders = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var conn, sql, result, categories, err_1;
+            var conn, sql, result, err_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -54,24 +55,24 @@ var CategoryModel = /** @class */ (function () {
                         return [4 /*yield*/, database_1["default"].connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = 'SELECT * FROM categories';
+                        sql = 'SELECT * FROM orders_products ';
                         return [4 /*yield*/, conn.query(sql)];
                     case 2:
                         result = _a.sent();
-                        categories = result.rows;
                         conn.release();
-                        return [2 /*return*/, categories];
+                        return [2 /*return*/, result.rows];
                     case 3:
                         err_1 = _a.sent();
-                        throw new Error("Can't get all categories. Error: ".concat(err_1));
+                        throw new Error("unable get products and orders: ".concat(err_1));
                     case 4: return [2 /*return*/];
                 }
             });
         });
     };
-    CategoryModel.prototype.find = function (id) {
+    // Get all products that have been included in orders
+    dashboardQueries.prototype.productsInOrders = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var conn, sql, result, category, err_2;
+            var conn, sql, result, err_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -79,24 +80,24 @@ var CategoryModel = /** @class */ (function () {
                         return [4 /*yield*/, database_1["default"].connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = 'SELECT * FROM categories WHERE id=($1)';
-                        return [4 /*yield*/, conn.query(sql, [id])];
+                        sql = 'SELECT name, price, order_id FROM products INNER JOIN orders_products ON products.id = orders_products.id';
+                        return [4 /*yield*/, conn.query(sql)];
                     case 2:
                         result = _a.sent();
-                        category = result.rows[0];
                         conn.release();
-                        return [2 /*return*/, category];
+                        return [2 /*return*/, result.rows];
                     case 3:
                         err_2 = _a.sent();
-                        throw new Error("Couldn't find category ".concat(id, ". Error: ").concat(err_2));
+                        throw new Error("unable get products and orders: ".concat(err_2));
                     case 4: return [2 /*return*/];
                 }
             });
         });
     };
-    CategoryModel.prototype.create = function (C) {
+    // Get all user that have been included in orders
+    dashboardQueries.prototype.usersInOrders = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var conn, sql, result, category, err_3;
+            var conn, sql, result, err_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -104,24 +105,24 @@ var CategoryModel = /** @class */ (function () {
                         return [4 /*yield*/, database_1["default"].connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = 'INSERT INTO categories (name) VALUES ($1) RETURNING *';
-                        return [4 /*yield*/, conn.query(sql, [C.name])];
+                        sql = 'SELECT first_name, user_id FROM users INNER JOIN orders ON users.id = orders.id';
+                        return [4 /*yield*/, conn.query(sql)];
                     case 2:
                         result = _a.sent();
-                        category = result.rows[0];
                         conn.release();
-                        return [2 /*return*/, category];
+                        return [2 /*return*/, result.rows];
                     case 3:
                         err_3 = _a.sent();
-                        throw new Error("Couldn't Create Category ".concat(C.name, ". Error: ").concat(err_3));
+                        throw new Error("unable get products and orders: ".concat(err_3));
                     case 4: return [2 /*return*/];
                 }
             });
         });
     };
-    CategoryModel.prototype.update = function (id, name) {
+    //Get the most five popular products
+    dashboardQueries.prototype.popularProducts = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var conn, sql, result, category, err_4;
+            var conn, sql, result, err_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -129,46 +130,20 @@ var CategoryModel = /** @class */ (function () {
                         return [4 /*yield*/, database_1["default"].connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = 'UPDATE categories SET name=$2 WHERE id=$1 RETURNING *';
-                        return [4 /*yield*/, conn.query(sql, [id, name])];
+                        sql = "SELECT SUM(product_id) as sum, name\n                        FROM products\n                        INNER JOIN orders_products\n                        ON products.id = orders_products.id\n                        GROUP BY(name)\n                        ORDER BY SUM(product_id) DESC\n                        LIMIT 5\n                        ";
+                        return [4 /*yield*/, conn.query(sql)];
                     case 2:
                         result = _a.sent();
-                        category = result.rows[0];
                         conn.release();
-                        return [2 /*return*/, category];
+                        return [2 /*return*/, result.rows];
                     case 3:
                         err_4 = _a.sent();
-                        throw new Error("Couldn't update category ".concat(name, ". Error: ").concat(err_4));
+                        throw new Error("unable to get products: ".concat(err_4));
                     case 4: return [2 /*return*/];
                 }
             });
         });
     };
-    CategoryModel.prototype["delete"] = function (id) {
-        return __awaiter(this, void 0, void 0, function () {
-            var conn, sql, result, DeletedCategory, err_5;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 3, , 4]);
-                        return [4 /*yield*/, database_1["default"].connect()];
-                    case 1:
-                        conn = _a.sent();
-                        sql = 'DELETE FROM categories WHERE id=($1) RETURNING *';
-                        return [4 /*yield*/, conn.query(sql, [id])];
-                    case 2:
-                        result = _a.sent();
-                        DeletedCategory = result.rows[0];
-                        conn.release();
-                        return [2 /*return*/, DeletedCategory];
-                    case 3:
-                        err_5 = _a.sent();
-                        throw new Error("Couldn't delete category ".concat(id, ". Error: ").concat(err_5));
-                    case 4: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    return CategoryModel;
+    return dashboardQueries;
 }());
-exports.CategoryModel = CategoryModel;
+exports.dashboardQueries = dashboardQueries;

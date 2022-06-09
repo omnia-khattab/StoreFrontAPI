@@ -1,9 +1,12 @@
 import Client from "../database";
+//import { ProductModel } from "./product";
+
+//const product_model=new ProductModel();
 
 export type Order={
     id?:number,
     order_status:string,
-    user_id:number
+    user_id:number|string
 };
 
 export class OrderModel{
@@ -67,6 +70,55 @@ export class OrderModel{
         }
     }
 
+    //add orderProduct
+    async addOrderProduct(quantity:number,orderID:number,productID:number):Promise<{id:number,quantity:number,order_id:string,product_id:string}>{
+        try{
+            const ordersql = 'SELECT * FROM orders WHERE id=($1)';
+    
+            const conn = await Client.connect();
+            const result = await conn.query(ordersql, [orderID])
+    
+            const order = result.rows[0];
+    
+            if (order.order_status !== "active") {
+              throw new Error(`Could not add product ${productID} to order ${orderID} because order status is ${order.order_status}`);
+            }
+    
+          conn.release();
+        } catch (err) {
+          throw new Error(`${err}`)
+        }
+        try {
+          const conn = await Client.connect();
+          const sql = "INSERT INTO orders_products (quantity,order_id,product_id) VALUES($1,$2,$3) RETURNING *";
+          const result = await conn.query(sql, [quantity,orderID,productID]);
+    
+          const order= result.rows[0];
+          conn.release();
+          
+          return order;
+    
+        } catch (err) {
+          throw new Error(`Could not add order to cart. Error: ${err}`);
+        }
+      }
+
+      
+    async removeOrderProduct(id: number): Promise<{id:number,quantity:number,order_id:string,product_id:string}> {
+        try {
+          const conn = await Client.connect();
+          const sql = "DELETE FROM orders_products WHERE id=($1) RETURNING *";
+          const result = await conn.query(sql, [id]);
+          const deletedOrder=result.rows[0];
+          conn.release();
+    
+          return deletedOrder;
+        } catch (err) {
+          throw new Error(`Could not delete orderproduct. Error: ${err}`);
+        }
+      }
+
+
     async delete(id:number):Promise<Order>{
         try{
             const conn = await Client.connect();
@@ -81,4 +133,17 @@ export class OrderModel{
         }
     }
 
+    async completedOrders():Promise<Order[]> {
+        try{
+            const conn = await Client.connect();
+            const sql="SELECT * FROM orders WHERE order_status='closed' ";
+            const result= await conn.query(sql);
+            const order= result.rows;
+            conn.release();
+            return order;
+        }
+        catch(err){
+            throw new Error(`Couldn't find orders. Error: ${err}` );
+        }
+    }
 }

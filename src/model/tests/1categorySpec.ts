@@ -2,8 +2,6 @@ import { CategoryModel } from "../category";
 
 const category_model = new CategoryModel();
 
-console.log("Environment from Spec is" + process.env.ENV);
-
 describe("Category Model", () => {
   it("Should have index method", () => {
     expect(category_model.index).toBeDefined();

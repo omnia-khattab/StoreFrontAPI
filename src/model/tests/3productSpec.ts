@@ -2,8 +2,6 @@ import { ProductModel } from "../product";
 
 const product_model = new ProductModel();
 
-console.log("Environment from Spec is" + process.env.ENV);
-
 describe("Product Model", () => {
   it("Should have index method", () => {
     expect(product_model.index).toBeDefined();
@@ -19,6 +17,10 @@ describe("Product Model", () => {
   });
   it("Should have delete method", () => {
     expect(product_model.delete).toBeDefined();
+  });
+
+  it("Should have Product by category method", () => {
+    expect(product_model.ProductByCategory).toBeDefined();
   });
 
   it("Create Method should add new product", async () => {
@@ -68,6 +70,24 @@ describe("Product Model", () => {
     });
   });
 
+  it("Get Product by Category Id=1", async () => {
+    const result = await product_model.ProductByCategory(1);
+    
+    expect(result).toEqual({
+        id: 1,
+        name: "product",
+        price:150,
+        pieces:20,
+        category_id: '1' ,
+        user_id: '1'
+    });
+  });
+  /*it("Get number of pieces of product with id=1", async () => {
+    const result = await product_model.PiecesNo(1);
+    
+    expect(result).toEqual(20);
+  });*/
+
   it("update Method should update product name to product updated , price to 100 , pieces to 3", async () => {
     const result = await product_model.update(1,"product updated",100,3);
    
@@ -81,9 +101,9 @@ describe("Product Model", () => {
     });
   });
 
-  it("Delete Method should Delete product with Id=1 ", async () => {
+  /*it("Delete Method should Delete product with Id=1 ", async () => {
     product_model.delete(1);
     const result = await product_model.index();
     expect(result).toEqual([]);
-  });
+  });*/
 });

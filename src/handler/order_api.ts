@@ -66,12 +66,50 @@ const delete_=async(req: Request,res: Response)=>{
     }
 }
 
+const addToCart = async (req: Request, res: Response) => {
+    
+    try {
+        const quantity:number=parseInt(req.body.quantity as string);
+        const order_id:number=parseInt(req.params.id);
+        const product_id:number=parseInt(req.body.product_id);
+
+        const order = await order_Model.addOrderProduct(quantity,order_id,product_id);
+        res.json(order);
+    } catch (err) {
+        res.status(400).json({message:`${err}`});
+    }
+  };
+
+
+  const removeFromCart = async (req: Request, res: Response) => {
+    try {
+      const deleted = await order_Model.removeOrderProduct(parseInt(req.params.id));
+      
+      res.json(deleted);
+    } catch (err) {
+        res.status(400).json({message:`${err}`});
+    }
+  };
+
+  const completedOrders=async(_req: Request,res: Response)=>{
+    try{
+         const orders= await order_Model.completedOrders();
+        res.json(orders);
+    }
+     catch(err){
+        res.status(400).status(201).json({message:`${err}`});
+    }
+}
 const ORDER_API=(app:express.Application)=>{
     app.get('/orders',verifyAuthToken,index);
     app.get('/order/:id',verifyAuthToken,find);
     app.post('/order/create',verifyAuthToken,create);
     app.put('/order/update/:id',verifyAuthToken,update);
     app.delete('/order/:id',verifyAuthToken,delete_);
+    app.post("/cart/orders/:id/products",verifyAuthToken, addToCart);
+    app.delete("/cart/orders/:id/products",verifyAuthToken, removeFromCart);
+    app.get('/orders/completed',verifyAuthToken,completedOrders);
+   
 };
 
 export default ORDER_API;

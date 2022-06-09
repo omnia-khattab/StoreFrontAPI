@@ -41,9 +41,8 @@ const create=async(req: Request,res: Response)=>{
              {id:newUser.id,name:newUser.first_name,email:newUser.email},
              process.env.TOKEN_SECRET as string
              ,{expiresIn:"1h"});
-        //save token to user
-        newUser.token=token;
-        res.status(201).json({newUser});
+        
+        res.status(201).json({token});
     }
     
      catch(err){
@@ -101,10 +100,10 @@ const authenticate=async(req: Request,res: Response)=>{
                 const token=jwt.sign({id:user.id,email:user.email},process.env.TOKEN_SECRET as string,
                                         {expiresIn:"1h"});
                 //save token to user
-                user.token=token;
+                res.status(201).json(token);
             }
             
-        res.status(201).json(user);
+        
     }
      catch(err){
         res.status(400).json({message:`${err}`});

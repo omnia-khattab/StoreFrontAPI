@@ -11,7 +11,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const product_1 = require("../product");
 const product_model = new product_1.ProductModel();
-console.log("Environment from Spec is" + process.env.ENV);
 describe("Product Model", () => {
     it("Should have index method", () => {
         expect(product_model.index).toBeDefined();
@@ -27,6 +26,9 @@ describe("Product Model", () => {
     });
     it("Should have delete method", () => {
         expect(product_model.delete).toBeDefined();
+    });
+    it("Should have Product by category method", () => {
+        expect(product_model.ProductByCategory).toBeDefined();
     });
     it("Create Method should add new product", () => __awaiter(void 0, void 0, void 0, function* () {
         const result = yield product_model.create({
@@ -69,6 +71,22 @@ describe("Product Model", () => {
             user_id: '1'
         });
     }));
+    it("Get Product by Category Id=1", () => __awaiter(void 0, void 0, void 0, function* () {
+        const result = yield product_model.ProductByCategory(1);
+        expect(result).toEqual({
+            id: 1,
+            name: "product",
+            price: 150,
+            pieces: 20,
+            category_id: '1',
+            user_id: '1'
+        });
+    }));
+    /*it("Get number of pieces of product with id=1", async () => {
+      const result = await product_model.PiecesNo(1);
+      
+      expect(result).toEqual(20);
+    });*/
     it("update Method should update product name to product updated , price to 100 , pieces to 3", () => __awaiter(void 0, void 0, void 0, function* () {
         const result = yield product_model.update(1, "product updated", 100, 3);
         expect(result).toEqual({
@@ -80,9 +98,9 @@ describe("Product Model", () => {
             user_id: '1'
         });
     }));
-    it("Delete Method should Delete product with Id=1 ", () => __awaiter(void 0, void 0, void 0, function* () {
-        product_model.delete(1);
-        const result = yield product_model.index();
-        expect(result).toEqual([]);
-    }));
+    /*it("Delete Method should Delete product with Id=1 ", async () => {
+      product_model.delete(1);
+      const result = await product_model.index();
+      expect(result).toEqual([]);
+    });*/
 });
