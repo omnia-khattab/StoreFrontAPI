@@ -105,7 +105,13 @@ var ProductModel = /** @class */ (function () {
                     case 1:
                         conn = _a.sent();
                         sql = 'INSERT INTO products (name,price,pieces,category_id,user_id) VALUES ($1,$2,$3,$4,$5) RETURNING *';
-                        return [4 /*yield*/, conn.query(sql, [p.name, p.price, p.pieces, p.category_id, p.user_id])];
+                        return [4 /*yield*/, conn.query(sql, [
+                                p.name,
+                                p.price,
+                                p.pieces,
+                                p.category_id,
+                                p.user_id,
+                            ])];
                     case 2:
                         result = _a.sent();
                         product = result.rows[0];

@@ -56,7 +56,10 @@ var index = function (_req, res) { return __awaiter(void 0, void 0, void 0, func
                 return [3 /*break*/, 3];
             case 2:
                 err_1 = _a.sent();
-                res.status(400).status(201).json({ message: "".concat(err_1) });
+                res
+                    .status(400)
+                    .status(201)
+                    .json({ message: "".concat(err_1) });
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }
@@ -102,7 +105,7 @@ var create = function (req, res) { return __awaiter(void 0, void 0, void 0, func
                 return [4 /*yield*/, user_Model.create(u)];
             case 2:
                 newUser = _a.sent();
-                token = jsonwebtoken_1["default"].sign({ id: newUser.id, name: newUser.first_name, email: newUser.email }, process.env.TOKEN_SECRET, { expiresIn: "1h" });
+                token = jsonwebtoken_1["default"].sign({ id: newUser.id, name: newUser.first_name, email: newUser.email }, process.env.TOKEN_SECRET, { expiresIn: '1h' });
                 res.status(201).json({ token: token });
                 return [3 /*break*/, 4];
             case 3:
@@ -198,9 +201,9 @@ var authenticate = function (req, res) { return __awaiter(void 0, void 0, void 0
             case 2:
                 user = _a.sent();
                 if (user) {
-                    token = jsonwebtoken_1["default"].sign({ id: user.id, email: user.email }, process.env.TOKEN_SECRET, { expiresIn: "1h" });
+                    token = jsonwebtoken_1["default"].sign({ id: user.id, email: user.email }, process.env.TOKEN_SECRET, { expiresIn: '1h' });
                     //save token to user
-                    res.status(201).json(token);
+                    res.status(201).json({ token: token });
                 }
                 return [3 /*break*/, 4];
             case 3:

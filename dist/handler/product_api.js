@@ -55,7 +55,10 @@ var index = function (_req, res) { return __awaiter(void 0, void 0, void 0, func
                 return [3 /*break*/, 3];
             case 2:
                 err_1 = _a.sent();
-                res.status(400).status(201).json({ message: "".concat(err_1) });
+                res
+                    .status(400)
+                    .status(201)
+                    .json({ message: "".concat(err_1) });
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }

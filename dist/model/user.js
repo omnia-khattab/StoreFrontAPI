@@ -111,7 +111,13 @@ var UserModel = /** @class */ (function () {
                         conn = _a.sent();
                         sql = 'INSERT INTO users (first_name,last_name,email,password,user_role) VALUES ($1,$2,$3,$4,$5) RETURNING *';
                         passHash = bcrypt_1["default"].hashSync(U.password + pepper, parseInt(saltRounds));
-                        return [4 /*yield*/, conn.query(sql, [U.first_name, U.last_name, U.email, passHash, U.user_role])];
+                        return [4 /*yield*/, conn.query(sql, [
+                                U.first_name,
+                                U.last_name,
+                                U.email,
+                                passHash,
+                                U.user_role,
+                            ])];
                     case 3:
                         result = _a.sent();
                         user = result.rows[0];
@@ -215,7 +221,7 @@ var UserModel = /** @class */ (function () {
                         return [4 /*yield*/, database_1["default"].connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = "SELECT * FROM users WHERE email=($1)";
+                        sql = 'SELECT * FROM users WHERE email=($1)';
                         return [4 /*yield*/, conn.query(sql, [email])];
                     case 2:
                         result = _a.sent();

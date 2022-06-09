@@ -1,85 +1,85 @@
-import { ProductModel } from "../product";
+import { ProductModel } from '../product';
 
 const product_model = new ProductModel();
 
-describe("Product Model", () => {
-  it("Should have index method", () => {
+describe('Product Model', () => {
+  it('Should have index method', () => {
     expect(product_model.index).toBeDefined();
   });
-  it("Should have create method", () => {
+  it('Should have create method', () => {
     expect(product_model.create).toBeDefined();
   });
-  it("Should have find method", () => {
+  it('Should have find method', () => {
     expect(product_model.find).toBeDefined();
   });
-  it("Should have update method", () => {
+  it('Should have update method', () => {
     expect(product_model.update).toBeDefined();
   });
-  it("Should have delete method", () => {
+  it('Should have delete method', () => {
     expect(product_model.delete).toBeDefined();
   });
 
-  it("Should have Product by category method", () => {
+  it('Should have Product by category method', () => {
     expect(product_model.ProductByCategory).toBeDefined();
   });
 
-  it("Create Method should add new product", async () => {
+  it('Create Method should add new product', async () => {
     const result = await product_model.create({
-      name: "product",
-      price:150,
-      pieces:20,
+      name: 'product',
+      price: 150,
+      pieces: 20,
       category_id: 1,
-      user_id: 1
+      user_id: 1,
     });
-    
+
     expect(result).toEqual({
       id: 1,
-      name: "product",
-      price:150,
-      pieces:20,
-      category_id: '1' ,
-      user_id: '1' 
+      name: 'product',
+      price: 150,
+      pieces: 20,
+      category_id: '1',
+      user_id: '1',
     });
   });
 
-  it("Index Method should Get All products in table ", async () => {
+  it('Index Method should Get All products in table ', async () => {
     const result = await product_model.index();
-   
+
     expect(result).toEqual([
       {
         id: 1,
-        name: "product",
-        price:150,
-        pieces:20,
+        name: 'product',
+        price: 150,
+        pieces: 20,
         category_id: '1',
-        user_id: '1' 
+        user_id: '1',
       },
     ]);
   });
 
-  it("Find Method should Get product with id=1", async () => {
+  it('Find Method should Get product with id=1', async () => {
     const result = await product_model.find(1);
-    
+
     expect(result).toEqual({
-        id: 1,
-        name: "product",
-        price:150,
-        pieces:20,
-        category_id: '1' ,
-        user_id: '1'
+      id: 1,
+      name: 'product',
+      price: 150,
+      pieces: 20,
+      category_id: '1',
+      user_id: '1',
     });
   });
 
-  it("Get Product by Category Id=1", async () => {
+  it('Get Product by Category Id=1', async () => {
     const result = await product_model.ProductByCategory(1);
-    
+
     expect(result).toEqual({
-        id: 1,
-        name: "product",
-        price:150,
-        pieces:20,
-        category_id: '1' ,
-        user_id: '1'
+      id: 1,
+      name: 'product',
+      price: 150,
+      pieces: 20,
+      category_id: '1',
+      user_id: '1',
     });
   });
   /*it("Get number of pieces of product with id=1", async () => {
@@ -88,16 +88,16 @@ describe("Product Model", () => {
     expect(result).toEqual(20);
   });*/
 
-  it("update Method should update product name to product updated , price to 100 , pieces to 3", async () => {
-    const result = await product_model.update(1,"product updated",100,3);
-   
+  it('update Method should update product name to product updated , price to 100 , pieces to 3', async () => {
+    const result = await product_model.update(1, 'product updated', 100, 3);
+
     expect(result).toEqual({
-        id: 1,
-        name: "product updated",
-        price:100,
-        pieces:3,
-        category_id: '1',
-        user_id: '1'
+      id: 1,
+      name: 'product updated',
+      price: 100,
+      pieces: 3,
+      category_id: '1',
+      user_id: '1',
     });
   });
 

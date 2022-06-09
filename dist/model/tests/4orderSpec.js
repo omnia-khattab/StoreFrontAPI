@@ -10,8 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const order_1 = require("../order");
-/*import { ProductModel } from "../product";
-const product_model=new ProductModel();*/
 const order_model = new order_1.OrderModel();
 describe("Order Model", () => {
     it("Should have index method", () => {
@@ -81,7 +79,7 @@ describe("Order Model", () => {
             user_id: '1'
         });
     }));
-    it("get all completed order ", () => __awaiter(void 0, void 0, void 0, function* () {
+    it("get all completed orders ", () => __awaiter(void 0, void 0, void 0, function* () {
         const result = yield order_model.completedOrders();
         expect(result).toEqual([
             {

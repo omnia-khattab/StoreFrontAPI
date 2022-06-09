@@ -55,7 +55,10 @@ var index = function (_req, res) { return __awaiter(void 0, void 0, void 0, func
                 return [3 /*break*/, 3];
             case 2:
                 err_1 = _a.sent();
-                res.status(400).status(201).json({ message: "".concat(err_1) });
+                res
+                    .status(400)
+                    .status(201)
+                    .json({ message: "".concat(err_1) });
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }
@@ -207,7 +210,10 @@ var completedOrders = function (_req, res) { return __awaiter(void 0, void 0, vo
                 return [3 /*break*/, 3];
             case 2:
                 err_8 = _a.sent();
-                res.status(400).status(201).json({ message: "".concat(err_8) });
+                res
+                    .status(400)
+                    .status(201)
+                    .json({ message: "".concat(err_8) });
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }
@@ -219,8 +225,8 @@ var ORDER_API = function (app) {
     app.post('/order/create', verifyToken_1["default"], create);
     app.put('/order/update/:id', verifyToken_1["default"], update);
     app["delete"]('/order/:id', verifyToken_1["default"], delete_);
-    app.post("/cart/orders/:id/products", verifyToken_1["default"], addToCart);
-    app["delete"]("/cart/orders/:id/products", verifyToken_1["default"], removeFromCart);
+    app.post('/orders/:id/products', verifyToken_1["default"], addToCart);
+    app["delete"]('/orders/:id/products', verifyToken_1["default"], removeFromCart);
     app.get('/orders/completed', verifyToken_1["default"], completedOrders);
 };
 exports["default"] = ORDER_API;

@@ -160,7 +160,7 @@ var OrderModel = /** @class */ (function () {
                     case 2:
                         result = _a.sent();
                         order = result.rows[0];
-                        if (order.order_status !== "active") {
+                        if (order.order_status !== 'active') {
                             throw new Error("Could not add product ".concat(productID, " to order ").concat(orderID, " because order status is ").concat(order.order_status));
                         }
                         conn.release();
@@ -173,7 +173,7 @@ var OrderModel = /** @class */ (function () {
                         return [4 /*yield*/, database_1["default"].connect()];
                     case 5:
                         conn = _a.sent();
-                        sql = "INSERT INTO orders_products (quantity,order_id,product_id) VALUES($1,$2,$3) RETURNING *";
+                        sql = 'INSERT INTO orders_products (quantity,order_id,product_id) VALUES($1,$2,$3) RETURNING *';
                         return [4 /*yield*/, conn.query(sql, [quantity, orderID, productID])];
                     case 6:
                         result = _a.sent();
@@ -198,7 +198,7 @@ var OrderModel = /** @class */ (function () {
                         return [4 /*yield*/, database_1["default"].connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = "DELETE FROM orders_products WHERE id=($1) RETURNING *";
+                        sql = 'DELETE FROM orders_products WHERE id=($1) RETURNING *';
                         return [4 /*yield*/, conn.query(sql, [id])];
                     case 2:
                         result = _a.sent();

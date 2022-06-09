@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node dist/server.js",
+    "start": "npm run build &&node dist/server.js",
     "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess \"node ./dist/server.js\"",
     "lint": "eslint . --ext .ts",
     "prettier": "prettier --config .prettierrc src/**/*.ts --write",
@@ -12,7 +12,8 @@
     "jasmine": "jasmine",
     "build": "npx tsc",
     "test": "set ENV=test&& db-migrate --env test up -c  && jasmine && db-migrate --env test down -c 5",
-    "testdown": " db-migrate --env test down -c 5"
+    "testdown": " db-migrate --env test down -c 5",
+    "migrateup":"db-migrate up -c 5"
   },
   "repository": {
     "type": "git",

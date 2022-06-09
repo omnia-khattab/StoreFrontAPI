@@ -17,7 +17,7 @@ app.use(body_parser_1["default"].urlencoded({ extended: false }));
 app.use(body_parser_1["default"].json());
 app.use((0, cors_1["default"])());
 app.get('/', function (_req, res) {
-    res.send("hello");
+    res.send('hello');
 });
 (0, user_api_1["default"])(app);
 (0, category_api_1["default"])(app);

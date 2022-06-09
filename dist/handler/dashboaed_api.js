@@ -55,7 +55,10 @@ var allOrders = function (_req, res) { return __awaiter(void 0, void 0, void 0, 
                 return [3 /*break*/, 3];
             case 2:
                 err_1 = _a.sent();
-                res.status(400).status(201).json({ message: "".concat(err_1) });
+                res
+                    .status(400)
+                    .status(201)
+                    .json({ message: "".concat(err_1) });
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }
@@ -74,7 +77,10 @@ var productsInOrders = function (_req, res) { return __awaiter(void 0, void 0, v
                 return [3 /*break*/, 3];
             case 2:
                 err_2 = _a.sent();
-                res.status(400).status(201).json({ message: "".concat(err_2) });
+                res
+                    .status(400)
+                    .status(201)
+                    .json({ message: "".concat(err_2) });
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }
@@ -93,7 +99,10 @@ var usersInOrders = function (_req, res) { return __awaiter(void 0, void 0, void
                 return [3 /*break*/, 3];
             case 2:
                 err_3 = _a.sent();
-                res.status(400).status(201).json({ message: "".concat(err_3) });
+                res
+                    .status(400)
+                    .status(201)
+                    .json({ message: "".concat(err_3) });
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }
@@ -112,7 +121,10 @@ var popularProducts = function (_req, res) { return __awaiter(void 0, void 0, vo
                 return [3 /*break*/, 3];
             case 2:
                 err_4 = _a.sent();
-                res.status(400).status(201).json({ message: "".concat(err_4) });
+                res
+                    .status(400)
+                    .status(201)
+                    .json({ message: "".concat(err_4) });
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }
