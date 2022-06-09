@@ -7,45 +7,45 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 ### Category
    
-**Create Route**:       '/category/create' [POST]
-**Index Route**:        '/categories' [GET]
-**Find Route**:         '/category/:id' [GET]
-**Update Route**:       '/category/update/:id' [PUT] => [update 'name']
-**Delete Route**:       '/category/:id' [DELETE]
+- Create Route:       '/category/create' [POST]
+- Index Route:        '/categories' [GET]
+- Find Route:         '/category/:id' [GET]
+- Update Route:       '/category/update/:id' [PUT] => [update 'name']
+- Delete Route:       '/category/:id' [DELETE]
 
 #### Products
-**Create Route**:       '/product/create' [POST]
-**Index Route**:        '/products' [GET]
-**Find By Id Route**:   '/product/:id' [GET]
-**Find By Id Category**:'/product/category/:id' [GET]
-**Update Route**:       '/product/update/:id' [PUT]  => [update 'name,price,pieces']
-**Delete Route**:       '/product/:id' [DELETE]
+- Create Route:       '/product/create' [POST]
+- Index Route:        '/products' [GET]
+- Find By Id Route:   '/product/:id' [GET]
+- Find By Id Category:'/product/category/:id' [GET]
+- Update Route:       '/product/update/:id' [PUT]  => [update 'name,price,pieces']
+- Delete Route:       '/product/:id' [DELETE]
 
 #### Users
-**Create Route**:       '/user/signup' [POST]
-**Index Route**:        '/users' [GET]
-**Find By Id Route**:   '/user/:id' [GET]
-**Update Route**:       '/user/update/:id' [PUT]          => [update 'first_name,last_name,email']
-**Reset Password Route**:'/user/updatePassword/:id' [PUT] => [update 'password']
-**Login Route**:        '/user/login/' [POST]
-**Delete Route**:       '/user/:id' [DELETE]
+- Create Route:       '/user/signup' [POST]
+- Index Route:        '/users' [GET]
+- Find By Id Route:   '/user/:id' [GET]
+- Update Route:       '/user/update/:id' [PUT]          => [update 'first_name,last_name,email']
+- Reset Password Route:'/user/updatePassword/:id' [PUT] => [update 'password']
+- Login Route:        '/user/login/' [POST]
+- Delete Route:       '/user/:id' [DELETE]
 
 #### Orders
-**Create Route**:       '/order/create' [POST]
-**Index Route**:        '/orders' [GET]
-**Find By Id Route**:   '/order/:id' [GET]
-**Update Route**:       '/order/update/:id' [PUT] => [update 'order_status']
-**Add Order Product**:  '/orders/:id/products' [POST]
-**Delete Order Product**:'/orders/:id/products' [DELETE]
-**Delete Route**:       '/order/:id' [DELETE]
-**Completed Orders**:   '/orders/completed'[GET]
+- Create Route:       '/order/create' [POST]
+- Index Route:        '/orders' [GET]
+- Find By Id Route:   '/order/:id' [GET]
+- Update Route:       '/order/update/:id' [PUT] => [update 'order_status']
+- Add Order Product:  '/orders/:id/products' [POST]
+- Delete Order Product:'/orders/:id/products' [DELETE]
+- Delete Route:       '/order/:id' [DELETE]
+- Completed Orders:   '/orders/completed'[GET]
 
 ### some Queires on Orders Products Tabel
 
-**All Ordders**:         '/dasboard/all/orders'[GET]
-**Products In Orders**:  '/dasboard/products'[GET]
-**Users In Orders**:     '/dashboard/users'[GET]
-**5 Popular Products**:  '/dashboard/topProducts'[GET]
+- All Ordders:         '/dasboard/all/orders'[GET]
+- Products In Orders:  '/dasboard/products'[GET]
+- sers In Orders:     '/dashboard/users'[GET]
+- 5 Popular Products:  '/dashboard/topProducts'[GET]
 
 ## Data Shapes
 #### Product
