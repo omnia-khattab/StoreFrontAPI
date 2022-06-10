@@ -37,20 +37,20 @@ describe('Orders End Point Test Response', (): void => {
     });
 
 
-    it('add order product', async () => {
+    it('add order product to cart', async () => {
         const service = {
             quantity:2,
             product_id:1
         }
-        const response = await request.post('/orders/2/products')
+        const response = await request.post('/cart/orders/2/products')
                             .send(service)
                             .set('Authorization', `Bearer ${token}`);
         expect(response.status).toBe(201);
     });
 
-    it('remove order product ', async () => {
+    it('remove order product from cart', async () => {
     
-        const response = await request.delete('/orders/2/products').set('Authorization', `Bearer ${token}`)
+        const response = await request.delete('/cart/orders/2/products').set('Authorization', `Bearer ${token}`)
                             
         expect(response.status).toBe(200);
     });

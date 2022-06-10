@@ -102,8 +102,8 @@ const ORDER_API = (app: express.Application) => {
   app.post('/order/create', verifyAuthToken, create);
   app.put('/order/update/:id', verifyAuthToken, update);
   app.delete('/order/:id', verifyAuthToken, delete_);
-  app.post('/orders/:id/products', verifyAuthToken, addToCart);
-  app.delete('/orders/:id/products', verifyAuthToken, removeFromCart);
+  app.post('/cart/orders/:id/products', verifyAuthToken, addToCart);
+  app.delete('/cart/orders/:id/products', verifyAuthToken, removeFromCart);
   app.get('/orders/completed', completedOrders);
 };
 

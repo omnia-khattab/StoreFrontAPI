@@ -104,8 +104,8 @@ const ORDER_API = (app) => {
     app.post('/order/create', verifyToken_1.default, create);
     app.put('/order/update/:id', verifyToken_1.default, update);
     app.delete('/order/:id', verifyToken_1.default, delete_);
-    app.post('/orders/:id/products', verifyToken_1.default, addToCart);
-    app.delete('/orders/:id/products', verifyToken_1.default, removeFromCart);
+    app.post('/cart/orders/:id/products', verifyToken_1.default, addToCart);
+    app.delete('/cart/orders/:id/products', verifyToken_1.default, removeFromCart);
     app.get('/orders/completed', completedOrders);
 };
 exports.default = ORDER_API;

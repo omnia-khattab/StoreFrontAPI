@@ -31,14 +31,14 @@ These are the notes from a meeting with the frontend developer that describe wha
 - Delete Route:       '/user/:id' [DELETE]
 
 #### Orders
-- Create Route:       '/order/create' [POST]
-- Index Route:        '/orders' [GET]
-- Find By Id Route:   '/order/:id' [GET]
-- Update Route:       '/order/update/:id' [PUT] => [update 'order_status']
-- Add Order Product:  '/orders/:id/products' [POST]
-- Delete Order Product:'/orders/:id/products' [DELETE]
-- Delete Route:       '/order/:id' [DELETE]
-- Completed Orders:   '/orders/completed'[GET]
+- Create Route:                 '/order/create' [POST]
+- Index Route:                  '/orders' [GET]
+- Find By Id Route:             '/order/:id' [GET]
+- Update Route:                 '/order/update/:id' [PUT] => [update 'order_status']
+- Add Order Product To Cart:    '/cart/orders/:id/products' [POST]
+- Delete Order Product from Cart:'/cart/orders/:id/products' [DELETE]
+- Delete Route:                  '/order/:id' [DELETE]
+- Completed Orders:              '/orders/completed'[GET]
 
 ### some Queires on Orders Products Tabel
 

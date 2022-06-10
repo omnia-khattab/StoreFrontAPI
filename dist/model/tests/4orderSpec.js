@@ -62,7 +62,7 @@ describe('Order Model', () => {
             user_id: '1',
         });
     }));
-    it('add products to order', () => __awaiter(void 0, void 0, void 0, function* () {
+    it('add products to cart', () => __awaiter(void 0, void 0, void 0, function* () {
         const result = yield order_model.addOrderProduct(5, 1, 1);
         expect(result).toEqual({
             id: 1,
@@ -89,7 +89,7 @@ describe('Order Model', () => {
             },
         ]);
     }));
-    it('Delete order products whose Id=1 ', () => __awaiter(void 0, void 0, void 0, function* () {
+    it('Delete order-product from cart whose Id=1 ', () => __awaiter(void 0, void 0, void 0, function* () {
         const result = yield order_model.removeOrderProduct(1);
         expect(result).toEqual({
             id: 1,

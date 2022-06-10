@@ -43,18 +43,18 @@ describe('Orders End Point Test Response', () => {
         });
         expect(response.status).toBe(201);
     }));
-    it('add order product', () => __awaiter(void 0, void 0, void 0, function* () {
+    it('add order product to cart', () => __awaiter(void 0, void 0, void 0, function* () {
         const service = {
             quantity: 2,
             product_id: 1
         };
-        const response = yield request.post('/orders/2/products')
+        const response = yield request.post('/cart/orders/2/products')
             .send(service)
             .set('Authorization', `Bearer ${token}`);
         expect(response.status).toBe(201);
     }));
-    it('remove order product ', () => __awaiter(void 0, void 0, void 0, function* () {
-        const response = yield request.delete('/orders/2/products').set('Authorization', `Bearer ${token}`);
+    it('remove order product from cart', () => __awaiter(void 0, void 0, void 0, function* () {
+        const response = yield request.delete('/cart/orders/2/products').set('Authorization', `Bearer ${token}`);
         expect(response.status).toBe(200);
     }));
     it('Update order status ', () => __awaiter(void 0, void 0, void 0, function* () {

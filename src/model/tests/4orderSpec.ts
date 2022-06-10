@@ -59,7 +59,7 @@ describe('Order Model', () => {
     });
   });
 
-  it('add products to order', async () => {
+  it('add products to cart', async () => {
     const result = await order_model.addOrderProduct(5, 1, 1);
 
     expect(result).toEqual({
@@ -92,7 +92,7 @@ describe('Order Model', () => {
     ]);
   });
 
-  it('Delete order products whose Id=1 ', async () => {
+  it('Delete order-product from cart whose Id=1 ', async () => {
     const result = await order_model.removeOrderProduct(1);
     expect(result).toEqual({
       id: 1,
