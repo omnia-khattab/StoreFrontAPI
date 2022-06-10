@@ -8,12 +8,9 @@ const order_Model = new OrderModel();
 const index = async (_req: Request, res: Response) => {
   try {
     const orders = await order_Model.index();
-    res.json(orders);
+    res.status(200).json(orders);
   } catch (err) {
-    res
-      .status(400)
-      .status(201)
-      .json({ message: `${err}` });
+    res.status(400).json({ message: `${err}` });
   }
 };
 
@@ -21,7 +18,7 @@ const find = async (req: Request, res: Response) => {
   const id = parseInt(req.params.id);
   try {
     const order = await order_Model.find(id);
-    res.status(201).json(order);
+    res.status(200).json(order);
   } catch (err) {
     res.status(400).json({ message: `${err}` });
   }
@@ -56,7 +53,7 @@ const delete_ = async (req: Request, res: Response) => {
 
   try {
     const order = await order_Model.delete(id);
-    res.status(201).json(order);
+    res.status(200).json(order);
   } catch (err) {
     res.status(400).json({ message: `${err}` });
   }
@@ -73,7 +70,7 @@ const addToCart = async (req: Request, res: Response) => {
       order_id,
       product_id
     );
-    res.json(order);
+    res.status(201).json(order);
   } catch (err) {
     res.status(400).json({ message: `${err}` });
   }
@@ -85,7 +82,7 @@ const removeFromCart = async (req: Request, res: Response) => {
       parseInt(req.params.id)
     );
 
-    res.json(deleted);
+    res.status(200).json(deleted);
   } catch (err) {
     res.status(400).json({ message: `${err}` });
   }
@@ -94,23 +91,20 @@ const removeFromCart = async (req: Request, res: Response) => {
 const completedOrders = async (_req: Request, res: Response) => {
   try {
     const orders = await order_Model.completedOrders();
-    res.json(orders);
+    res.status(200).json(orders);
   } catch (err) {
-    res
-      .status(400)
-      .status(201)
-      .json({ message: `${err}` });
+    res.status(400).json({ message: `${err}` });
   }
 };
 const ORDER_API = (app: express.Application) => {
-  app.get('/orders', verifyAuthToken, index);
-  app.get('/order/:id', verifyAuthToken, find);
+  app.get('/orders', index);
+  app.get('/order/:id', find);
   app.post('/order/create', verifyAuthToken, create);
   app.put('/order/update/:id', verifyAuthToken, update);
   app.delete('/order/:id', verifyAuthToken, delete_);
   app.post('/orders/:id/products', verifyAuthToken, addToCart);
   app.delete('/orders/:id/products', verifyAuthToken, removeFromCart);
-  app.get('/orders/completed', verifyAuthToken, completedOrders);
+  app.get('/orders/completed', completedOrders);
 };
 
 export default ORDER_API;

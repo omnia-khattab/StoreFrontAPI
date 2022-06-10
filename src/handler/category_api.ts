@@ -8,12 +8,9 @@ const category_Model = new CategoryModel();
 const index = async (_req: Request, res: Response) => {
   try {
     const categories = await category_Model.index();
-    res.json(categories);
+    res.status(200).json(categories);
   } catch (err) {
-    res
-      .status(400)
-      .status(201)
-      .json({ message: `${err}` });
+    res.status(400).json({ message: `${err}` });
   }
 };
 
@@ -21,7 +18,7 @@ const find = async (req: Request, res: Response) => {
   const id = parseInt(req.params.id);
   try {
     const categories = await category_Model.find(id);
-    res.status(201).json(categories);
+    res.status(200).json(categories);
   } catch (err) {
     res.status(400).json({ message: `${err}` });
   }
@@ -55,15 +52,15 @@ const delete_ = async (req: Request, res: Response) => {
 
   try {
     const category = await category_Model.delete(id);
-    res.status(201).json(category);
+    res.status(200).json(category);
   } catch (err) {
     res.status(400).json({ message: `${err}` });
   }
 };
 
 const CATEGORY_API = (app: express.Application) => {
-  app.get('/categories', verifyAuthToken, index);
-  app.get('/category/:id', verifyAuthToken, find);
+  app.get('/categories', index);
+  app.get('/category/:id', find);
   app.post('/category/create', verifyAuthToken, create);
   app.put('/category/update/:id', verifyAuthToken, update);
   app.delete('/category/:id', verifyAuthToken, delete_);

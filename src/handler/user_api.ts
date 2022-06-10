@@ -8,12 +8,9 @@ const user_Model = new UserModel();
 const index = async (_req: Request, res: Response) => {
   try {
     const users = await user_Model.index();
-    res.json(users);
+    res.status(200).json(users);
   } catch (err) {
-    res
-      .status(400)
-      .status(201)
-      .json({ message: `${err}` });
+    res.status(400).json({ message: `${err}` });
   }
 };
 
@@ -21,7 +18,7 @@ const find = async (req: Request, res: Response) => {
   const id = parseInt(req.params.id);
   try {
     const users = await user_Model.find(id);
-    res.status(201).json(users);
+    res.status(200).json(users);
   } catch (err) {
     res.status(400).json({ message: `${err}` });
   }
@@ -79,7 +76,7 @@ const delete_ = async (req: Request, res: Response) => {
 
   try {
     const user = await user_Model.delete(id);
-    res.status(201).json(user);
+    res.status(200).json(user);
   } catch (err) {
     res.status(400).json({ message: `${err}` });
   }
@@ -99,15 +96,15 @@ const authenticate = async (req: Request, res: Response) => {
         { expiresIn: '1h' }
       );
       //save token to user
-      res.status(201).json({token});
+      res.status(200).json({token});
     }
   } catch (err) {
     res.status(400).json({ message: `${err}` });
   }
 };
 const USER_API = (app: express.Application) => {
-  app.get('/users', verifyAuthToken, index);
-  app.get('/user/:id', verifyAuthToken, find);
+  app.get('/users',index);
+  app.get('/user/:id',find);
   app.post('/user/signup', create);
   app.post('/user/login/', authenticate);
   app.put('/user/update/:id', verifyAuthToken, update);

@@ -8,12 +8,9 @@ const product_Model = new ProductModel();
 const index = async (_req: Request, res: Response) => {
   try {
     const products = await product_Model.index();
-    res.json(products);
+    res.status(200).json(products);
   } catch (err) {
-    res
-      .status(400)
-      .status(201)
-      .json({ message: `${err}` });
+    res.status(400).json({ message: `${err}` });
   }
 };
 
@@ -21,7 +18,7 @@ const find = async (req: Request, res: Response) => {
   const id = parseInt(req.params.id);
   try {
     const product = await product_Model.find(id);
-    res.status(201).json(product);
+    res.status(200).json(product);
   } catch (err) {
     res.status(400).json({ message: `${err}` });
   }
@@ -61,7 +58,7 @@ const delete_ = async (req: Request, res: Response) => {
 
   try {
     const product = await product_Model.delete(id);
-    res.status(201).json(product);
+    res.status(200).json(product);
   } catch (err) {
     res.status(400).json({ message: `${err}` });
   }
@@ -71,7 +68,7 @@ const ProductByCategory = async (req: Request, res: Response) => {
   const id = parseInt(req.params.id);
   try {
     const product = await product_Model.ProductByCategory(id);
-    res.status(201).json(product);
+    res.status(200).json(product);
   } catch (err) {
     res.status(400).json({ message: `${err}` });
   }
@@ -80,7 +77,7 @@ const ProductByCategory = async (req: Request, res: Response) => {
     const product_id=parseInt(req.params.id)
     try{
          const product= await product_Model.PiecesNo(product_id);
-        res.status(201).json(product);
+        res.status(200).json(product);
     }
      catch(err){
         res.status(400).json({message:`${err}`});
@@ -88,9 +85,9 @@ const ProductByCategory = async (req: Request, res: Response) => {
 }*/
 
 const PRODUCT_API = (app: express.Application) => {
-  app.get('/products', verifyAuthToken, index);
-  app.get('/product/:id', verifyAuthToken, find);
-  app.get('/product/category/:id', verifyAuthToken, ProductByCategory);
+  app.get('/products', index);
+  app.get('/product/:id', find);
+  app.get('/product/category/:id', ProductByCategory);
   app.post('/product/create', verifyAuthToken, create);
   app.put('/product/update/:id', verifyAuthToken, update);
   app.delete('/product/:id', verifyAuthToken, delete_);

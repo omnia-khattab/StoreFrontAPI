@@ -8,56 +8,44 @@ const dashboardQuert = new dashboardQueries();
 const allOrders = async (_req: Request, res: Response) => {
   try {
     const orders = await dashboardQuert.allOrders();
-    res.json(orders);
+    res.status(200).json(orders);
   } catch (err) {
-    res
-      .status(400)
-      .status(201)
-      .json({ message: `${err}` });
+    res.status(400).json({ message: `${err}` });
   }
 };
 
 const productsInOrders = async (_req: Request, res: Response) => {
   try {
     const orders = await dashboardQuert.productsInOrders();
-    res.json(orders);
+    res.status(200).json(orders);
   } catch (err) {
-    res
-      .status(400)
-      .status(201)
-      .json({ message: `${err}` });
+    res.status(400).json({ message: `${err}` });
   }
 };
 
 const usersInOrders = async (_req: Request, res: Response) => {
   try {
     const users = await dashboardQuert.usersInOrders();
-    res.json(users);
+    res.status(200).json(users);
   } catch (err) {
-    res
-      .status(400)
-      .status(201)
-      .json({ message: `${err}` });
+    res.status(400).json({ message: `${err}` });
   }
 };
 
 const popularProducts = async (_req: Request, res: Response) => {
   try {
     const products = await dashboardQuert.popularProducts();
-    res.json(products);
+    res.status(200).json(products);
   } catch (err) {
-    res
-      .status(400)
-      .status(201)
-      .json({ message: `${err}` });
+    res.status(400).json({ message: `${err}` });
   }
 };
 
 const dashboard_API = (app: express.Application) => {
-  app.get('/dasboard/all/orders', verifyAuthToken, allOrders);
-  app.get('/dasboard/products', verifyAuthToken, productsInOrders);
-  app.get('/dashboard/users', verifyAuthToken, usersInOrders);
-  app.get('/dashboard/topProducts', verifyAuthToken, popularProducts);
+  app.get('/dasboard/all/orders',  allOrders);
+  app.get('/dasboard/products', productsInOrders);
+  app.get('/dashboard/users',  usersInOrders);
+  app.get('/dashboard/topProducts', popularProducts);
 };
 
 export default dashboard_API;

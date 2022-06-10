@@ -11,52 +11,52 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const category_1 = require("../category");
 const category_model = new category_1.CategoryModel();
-describe("Category Model", () => {
-    it("Should have index method", () => {
+describe('Category Model', () => {
+    it('Should have index method', () => {
         expect(category_model.index).toBeDefined();
     });
-    it("Should have create method", () => {
+    it('Should have create method', () => {
         expect(category_model.create).toBeDefined();
     });
-    it("Should have find method", () => {
+    it('Should have find method', () => {
         expect(category_model.find).toBeDefined();
     });
-    it("Should have update method", () => {
+    it('Should have update method', () => {
         expect(category_model.update).toBeDefined();
     });
-    it("Should have delete method", () => {
+    it('Should have delete method', () => {
         expect(category_model.delete).toBeDefined();
     });
-    it("Create Method should add new Category", () => __awaiter(void 0, void 0, void 0, function* () {
+    it('Create Method should add new Category', () => __awaiter(void 0, void 0, void 0, function* () {
         const result = yield category_model.create({
-            name: "category1",
+            name: 'category1',
         });
         expect(result).toEqual({
             id: 1,
-            name: "category1",
+            name: 'category1',
         });
     }));
-    it("Index Method should Get All categories in table ", () => __awaiter(void 0, void 0, void 0, function* () {
+    it('Index Method should Get All categories in table ', () => __awaiter(void 0, void 0, void 0, function* () {
         const result = yield category_model.index();
         expect(result).toEqual([
             {
                 id: 1,
-                name: "category1",
+                name: 'category1',
             },
         ]);
     }));
-    it("Find Method should Get category with id=1", () => __awaiter(void 0, void 0, void 0, function* () {
+    it('Find Method should Get category with id=1', () => __awaiter(void 0, void 0, void 0, function* () {
         const result = yield category_model.find(1);
         expect(result).toEqual({
             id: 1,
-            name: "category1",
+            name: 'category1',
         });
     }));
-    it("update Method should update category with id=1 from category1 to Category updated", () => __awaiter(void 0, void 0, void 0, function* () {
-        const result = yield category_model.update(1, "Category updated");
+    it('update Method should update category with id=1 from category1 to Category updated', () => __awaiter(void 0, void 0, void 0, function* () {
+        const result = yield category_model.update(1, 'Category updated');
         expect(result).toEqual({
             id: 1,
-            name: "Category updated",
+            name: 'Category updated',
         });
     }));
     /*it("Delete Method should Delete Category with Id=1 ", async () => {

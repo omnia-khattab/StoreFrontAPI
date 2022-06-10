@@ -49,31 +49,31 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 ## Data Shapes
 #### Product
--  id
-- name
-- price
-- pieces
-- category_id (FK)
-- user_id (FK)
+- id SERIAL PRIMARY KEY
+- name VARCHAR(20)
+- price INTEGER
+- pieces INTEGER
+- category_id  bigint REFERENCES categories(id) on delete cascade on update cascade,
+- user_id bigint REFERENCES users(id) on delete cascade on update cascad
 
 #### User
-- id
-- first_name
-- last_name
-- email
-- password
-- user_role (admin or user)
+- id SERIAL PRIMARY KEY
+- first_name VARCHAR(20)
+- last_name VARCHAR(20)
+- email VARCHAR(50) UNIQUE
+- password VARCHAR
+- user_role role (admin or user)
 
 #### Orders
-- id
-- status of order (active or complete)
-- user_id (FK)
+- id SERIAL PRIMARY KEY
+- order_status status (active or complete)
+- user_id bigint REFERENCES users(id) on delete cascade on update cascade
 
 #### Orders-products
-- id
-- quantity
-- order_id (FK)
-- product_id (FK)
+- id SERIAL PRIMARY KEY
+- quantity INTEGER
+- order_id bigint REFERENCES orders(id) on delete cascade on update cascade
+- product_id bigint REFERENCES products(id) on delete cascade on update cascade
 
 
 ### Env 
