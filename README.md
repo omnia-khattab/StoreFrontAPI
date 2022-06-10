@@ -29,7 +29,7 @@ This repo contains a Node and Express app to build Store front API. To get start
   - ### Grant Permission to user
       - GRANT ALL PRIVILEGES ON DATABASE store TO store_user;
       - GRANT ALL PRIVILEGES ON DATABASE store_test TO store_user;
-
+   - ### database Schema in requirements.md file
 ## Server
   - ### Port
     - 3000
