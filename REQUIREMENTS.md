@@ -48,7 +48,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 - 5 Popular Products:  '/dashboard/topProducts'[GET]
 
 ## Data Shapes
-#### Product
+#### products table
 - id SERIAL PRIMARY KEY
 - name VARCHAR(20)
 - price INTEGER
@@ -56,7 +56,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 - category_id  bigint REFERENCES categories(id) on delete cascade on update cascade,
 - user_id bigint REFERENCES users(id) on delete cascade on update cascad
 
-#### User
+#### users table
 - id SERIAL PRIMARY KEY
 - first_name VARCHAR(20)
 - last_name VARCHAR(20)
@@ -64,12 +64,12 @@ These are the notes from a meeting with the frontend developer that describe wha
 - password VARCHAR
 - user_role role (admin or user)
 
-#### Orders
+#### orders table
 - id SERIAL PRIMARY KEY
 - order_status status (active or complete)
 - user_id bigint REFERENCES users(id) on delete cascade on update cascade
 
-#### Orders-products
+#### orders_products table
 - id SERIAL PRIMARY KEY
 - quantity INTEGER
 - order_id bigint REFERENCES orders(id) on delete cascade on update cascade
