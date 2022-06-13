@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import { User, UserModel } from '../model/user';
-import jwt from 'jsonwebtoken';
+import jwt, { Secret } from 'jsonwebtoken';
 import verifyAuthToken from '../middlwares/verifyToken';
 
 const user_Model = new UserModel();
@@ -36,7 +36,7 @@ const create = async (req: Request, res: Response) => {
     const newUser = await user_Model.create(u);
     const token = jwt.sign(
       { id: newUser.id, name: newUser.first_name, email: newUser.email },
-      process.env.TOKEN_SECRET as string,
+      process.env.TOKEN_SECRET as Secret,
       { expiresIn: '1h' }
     );
 
